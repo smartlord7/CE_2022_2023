@@ -3,13 +3,13 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 
-def range_(begin: float,
-           end: float,
+def range_(end: float,
+           begin: float = 0.0,
            step: float = 1.0) -> list:
     r = list()
     dec_places = str(step)[::-1].find('.')
 
-    while begin <= end:
+    while begin < end:
         begin = round(begin, dec_places)
         r.append(begin)
 
@@ -38,6 +38,14 @@ def dim1_derivative(function: str,
 
     return (eval(function, allowed_func, {var_name: val + precision}) - eval(function, allowed_func,
                                                                              {var_name: val})) / precision
+
+
+def dim1_derivative2(func,
+                     precision: float = 0.000000001):
+    def der(val):
+        return (func(val + precision) - func(val)) / precision
+
+    return der
 
 
 def permutations(s: set) -> list:
