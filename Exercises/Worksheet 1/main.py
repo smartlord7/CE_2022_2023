@@ -84,7 +84,7 @@ def gradient_ascent(function,
 def rdm_restart_gradient_ascent(function,
                     domain,
                     epsilon=0.001,
-                    learning_rate=0.1,
+                    learning_rate=1.0,
                     time_limit=10):
 
     begin = t.perf_counter()
@@ -132,7 +132,9 @@ def newton_method(function,
     gradients.append(gradient)
 
     while abs(gradient) >= epsilon:
-        best -= learning_rate * (hessian ** -1) * gradient
+        if hessian == 0:
+            hessian = 1.0
+        best -= (learning_rate * (hessian ** -1) * gradient)
         gradient = der(best)
         hessian = der2(best)
         gradients.append(gradient)
