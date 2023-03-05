@@ -90,12 +90,6 @@ def outer_product_sparse_vec(sparse_vec1: dict, sparse_vec2: dict) -> dict:
     for k in sparse_vec1.keys():
         if k in sparse_vec2:
             result[k] = sparse_vec1[k] * sparse_vec2[k]
-        else:
-            result[k] = sparse_vec1[k]
-
-    for k in sparse_vec2.keys():
-        if k not in result:
-            result[k] = sparse_vec2[k]
 
     return result
 
